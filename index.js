@@ -165,13 +165,17 @@ app.get("/send-message", async (req, res) => {
         response: "El numero no existe",
       });
     } else {
-      numberWA = "593" + number + "@s.whatsapp.net";
+      numberWA =number + "@s.whatsapp.net";
+     // numberWA = "593" + number + "@s.whatsapp.net";
    
       if (isConnected()) {
 
        
         const exist = await sock.onWhatsApp(numberWA);
-
+        console.log(exist.jid);
+        console.log(number);
+        console.log(tempMessage);
+        console.log(exist);
         if (exist?.jid || (exist && exist[0]?.jid)) {
           sock
             .sendMessage(exist.jid || exist[0].jid, {
